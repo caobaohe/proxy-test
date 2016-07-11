@@ -17,7 +17,7 @@ import static org.objectweb.asm.Opcodes.V1_5;
 public class Test {
     public static void main(String[] args) {
         byte[] classByte = generateClassByte();
-        Class c = MyClassLoader.getInstance().defineClass("pkg.Comparable", classByte);
+        Class c = MyClassLoader0.getInstance().defineClass("pkg.Comparable", classByte);
 
         log.info("class: {}", c.getMethods());
     }
@@ -37,6 +37,7 @@ public class Test {
         cw.visitMethod(ACC_PUBLIC + ACC_ABSTRACT, "compareTo",
                 "(Ljava/lang/Object;)I", null, null).visitEnd();
         cw.visitEnd();
+
         byte[] b = cw.toByteArray();
 
         return b;

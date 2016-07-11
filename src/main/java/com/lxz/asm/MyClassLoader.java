@@ -1,16 +1,28 @@
 package com.lxz.asm;
 
-public class MyClassLoader extends ClassLoader {
-    private static final MyClassLoader instance = new MyClassLoader();
+import org.objectweb.asm.Opcodes;
 
-    private MyClassLoader(){
+/**
+ * 自定义ClassLoader
+ */
+public class MyClassLoader extends ClassLoader implements Opcodes {
+
+
+    public MyClassLoader() {
+        super();
     }
 
-    public static MyClassLoader getInstance(){
-        return instance;
+    public MyClassLoader(ClassLoader parent) {
+        super(parent);
     }
 
-    public Class defineClass(String name, byte[] b) {
-        return defineClass(name, b, 0, b.length);
+    @Override
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
+        return super.loadClass(name);
     }
+
+    public Class<?> defineClass(String name, byte[] b) {
+        return super.defineClass(name, b, 0, b.length);
+    }
+
 }
